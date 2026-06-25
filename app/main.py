@@ -3,6 +3,7 @@ from collections.abc import AsyncGenerator
 
 from fastapi import FastAPI
 
+from app.api.routes import users
 from app.db.init_db import init_db
 
 @asynccontextmanager
@@ -16,6 +17,8 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifespan
 )
+
+app.include_router(users.router)
 
 
 @app.get("/health")
