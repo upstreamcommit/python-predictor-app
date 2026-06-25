@@ -1,17 +1,21 @@
+from contextlib import asynccontextmanager
+from collections.abc import AsyncGenerator
+
 from fastapi import FastAPI
 
-from app.db.base import Base
-from app.db.database import engine
-from app.models import User
+from app.db.init_db import init_db
 
-Base.metadata.create_all(bind=engine)
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
+    init_db()
+    yield
 
 app = FastAPI(
     title="Predictor API",
     description="Backend API for a football prediction game.",
     version="0.1.0",
+    lifespan=lifespan
 )
-
 
 
 @app.get("/health")
