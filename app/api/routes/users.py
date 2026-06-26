@@ -35,19 +35,19 @@ def create_user(
     if existing_username is not None and existing_user_email is not None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="User with both that username and email already exists"
+            detail="User with both that username and email already exists."
         )
         
     if existing_username is not None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="User with that username already exists"
+            detail="User with that username already exists."
         )
         
     if existing_user_email is not None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="User with that email already exists"
+            detail="User with that email already exists."
         )
         
     user = User(
